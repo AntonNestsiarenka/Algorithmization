@@ -1,7 +1,7 @@
 package com.company;
 
 import Utils.ArraysUtils.ArrayUtils;
-import Utils.Exceptions.OverflowIntException;
+import Utils.Exceptions.MyException;
 import Utils.InputOutputUtils.InputOutputUtils;
 import Utils.OtherUtils.OtherUtils;
 
@@ -649,7 +649,7 @@ public class Main {
         System.out.print("N - значные числа, цифры которых образуют строго возрастающую последовательность: ");
         try {
             OtherUtils.printAllNaturalNumbersWithDigitsAscending(n);
-        } catch (OverflowIntException e) {
+        } catch (MyException e) {
             e.printStackTrace();
         }
     }
@@ -662,7 +662,7 @@ public class Main {
         BigInteger sum = BigInteger.ZERO;
         try {
             sum = OtherUtils.sumOfNaturalNumbersWithOddDigits(n);
-        } catch (OverflowIntException e) {
+        } catch (MyException e) {
             e.printStackTrace();
         }
         int countEvenDigits = OtherUtils.countEvenDigitsInNaturalNumber(sum);

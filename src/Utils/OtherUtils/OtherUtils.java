@@ -1,12 +1,9 @@
 package Utils.OtherUtils;
 
 import Utils.ArraysUtils.ArrayUtils;
-import Utils.Exceptions.OverflowIntException;
-import com.company.Fraction;
-import com.company.Pair;
+import Utils.Exceptions.MyException;
 
 import java.math.BigInteger;
-import java.util.Random;
 
 public class OtherUtils {
 
@@ -39,7 +36,7 @@ public class OtherUtils {
     public static boolean isNaturalNumber(int number)
     {
         // Является ли число натуральным.
-        return number > 1;
+        return number >= 1;
     }
 
     public static boolean isSimpleNumber(int number)
@@ -400,12 +397,12 @@ public class OtherUtils {
         return true;
     }
 
-    public static void printAllNaturalNumbersWithDigitsAscending(int n) throws OverflowIntException {
+    public static void printAllNaturalNumbersWithDigitsAscending(int n) throws MyException {
         /* Выводит в консоль все натуральные n-значные числа, цифры которых образуют строго возрастающую
            последовательность. При длинне числа более 9 знаков бросает исключение OverflowIntException. */
         if (n > 9)
         {
-            throw new OverflowIntException("Произошло переполнение типа Int");
+            throw new MyException("Произошло переполнение типа Int");
         }
         int limit = (int)Math.pow(10, n);
         for (int i = (int)Math.pow(10, n - 1); i < limit; i++)
@@ -433,12 +430,12 @@ public class OtherUtils {
         return count;
     }
 
-    public static BigInteger sumOfNaturalNumbersWithOddDigits(int n) throws OverflowIntException {
+    public static BigInteger sumOfNaturalNumbersWithOddDigits(int n) throws MyException {
         /* Возвращает сумму (экземпляр BigInteger) всех n-значных чисел, все цифры которых являются нечетными. При
            длинне числа более 9 знаков бросает исключение OverflowIntException. */
         if (n > 9)
         {
-            throw new OverflowIntException("Произошло переполнение типа Int");
+            throw new MyException("Произошло переполнение типа Int");
         }
         BigInteger sumOfOddDigits = BigInteger.ZERO;
         int limit = (int)Math.pow(10, n);

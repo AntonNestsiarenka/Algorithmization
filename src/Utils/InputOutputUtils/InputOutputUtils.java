@@ -1,5 +1,6 @@
 package Utils.InputOutputUtils;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputOutputUtils {
@@ -8,7 +9,15 @@ public class InputOutputUtils {
         // Функция для ввода натурального числа из консоли.
         System.out.print(str);
         Scanner in = new Scanner(System.in);
-        int number = in.nextInt();
+        int number;
+        try {
+            number = in.nextInt();
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Введенные данные некорректны. На ввод ожидается целое число.");
+            return inputNaturalNumber(str);
+        }
         if (number > 0)
             return number;
         System.out.println("Число должно быть > 0.");
@@ -19,7 +28,15 @@ public class InputOutputUtils {
         // Функция для ввода целочисленного положительного значения из консоли.
         System.out.print(str);
         Scanner in = new Scanner(System.in);
-        int number = in.nextInt();
+        int number;
+        try {
+            number = in.nextInt();
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Введенные данные некорректны. На ввод ожидается целое число.");
+            return inputUInt(str);
+        }
         if (number >= 0)
             return number;
         System.out.println("Число должно быть положительным.");
@@ -30,7 +47,15 @@ public class InputOutputUtils {
         // Функция для ввода целочисленного значения из консоли.
         System.out.print(str);
         Scanner in = new Scanner(System.in);
-        int number = in.nextInt();
+        int number;
+        try {
+            number = in.nextInt();
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Введенные данные некорректны. На ввод ожидается целое число.");
+            return inputInt(str);
+        }
         return number;
     }
 
@@ -38,7 +63,15 @@ public class InputOutputUtils {
         // Функция для ввода действительного значения из консоли.
         System.out.print(str);
         Scanner in = new Scanner(System.in);
-        double number = in.nextDouble();
+        double number;
+        try {
+            number = in.nextDouble();
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Введенные данные некорректны. На ввод ожидается действительное число.");
+            return inputDouble(str);
+        }
         return number;
     }
 
@@ -46,7 +79,15 @@ public class InputOutputUtils {
         // Функция для ввода действительного положительного значения из консоли.
         System.out.print(str);
         Scanner in = new Scanner(System.in);
-        double number = in.nextDouble();
+        double number;
+        try {
+            number = in.nextDouble();
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Введенные данные некорректны. На ввод ожидается действительное число.");
+            return inputUDouble(str);
+        }
         if (number >= 0)
             return number;
         System.out.println("Число должно быть положительным.");
