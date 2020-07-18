@@ -7,6 +7,8 @@ import java.math.BigInteger;
 
 public class OtherUtils {
 
+    /* Различные полезные методы. */
+
     public static int randInt(int lowLimit, int highLimit)
     {
         // Генерация случайного целого значения в диапазоне [lowLimit, highlimit].
@@ -41,7 +43,7 @@ public class OtherUtils {
 
     public static boolean isSimpleNumber(int number)
     {
-        // Функция определяет простое это число или нет.
+        // Метод определяет простое это число или нет.
         if (isNaturalNumber(number)) {
             double root = Math.sqrt(number);
             for (int i = 2; i <= root; i++) {
@@ -56,41 +58,25 @@ public class OtherUtils {
     public static double max(double a, double b)
     {
         // Максимальное из двух чисел.
-        if (a > b)
-        {
-            return a;
-        }
-        return b;
+        return (a >= b) ? a : b;
     }
 
     public static double min(double a, double b)
     {
         // Минимальное из двух чисел.
-        if (a < b)
-        {
-            return a;
-        }
-        return b;
+        return (a <= b) ? a : b;
     }
 
     public static int min(int a, int b)
     {
         // Минимальное из двух чисел.
-        if (a < b)
-        {
-            return a;
-        }
-        return b;
+        return (a <= b) ? a : b;
     }
 
     public static int max(int a, int b)
     {
         // Максимальное из двух чисел.
-        if (a > b)
-        {
-            return a;
-        }
-        return b;
+        return (a >= b) ? a : b;
     }
 
     public static int greatestCommonDivisor(int a, int b)
@@ -460,5 +446,4 @@ public class OtherUtils {
         }
         return count;
     }
-
 }

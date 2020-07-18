@@ -2,10 +2,15 @@ package com.company;
 
 import Utils.ArraysUtils.ArrayUtils;
 import Utils.Exceptions.MyException;
-import Utils.InputOutputUtils.InputOutputUtils;
+import Utils.InputUtils.InputUtils;
 import Utils.OtherUtils.OtherUtils;
+import com.company.Fraction.Exceptions.FractionDenominatorInvalidValue;
+import com.company.Fraction.Fraction;
+import com.company.MagicSquare.Exceptions.MagicSquareSizeException;
+import com.company.MagicSquare.MagicSquare;
 
 import java.math.BigInteger;
+import java.util.Scanner;
 
 public class Main {
 
@@ -16,9 +21,10 @@ public class Main {
     public static void task1()
     {
         // В массив A [N] занесены натуральные числа. Найти сумму тех элементов, которые кратны данному К.
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         int array[] = ArrayUtils.createAndFill1DArrayRandom(sizeArray, 1, 50);
-        int k = InputOutputUtils.inputInt("Введите целое значение K для проверки на кратность: ");
+        int k = InputUtils.inputInt("Введите целое значение K для проверки на кратность: ", scanner);
         int sum = ArrayUtils.sumOfMultipleElements1DArray(array, k);
         System.out.printf("Сумма элементов одномерного массива кратных %d = %d\n", k, sum);
     }
@@ -27,9 +33,10 @@ public class Main {
     {
         /* Дана последовательность действительных чисел а1 ,а2 ,..., ап. Заменить все ее члены, большие данного Z, этим
            числом. Подсчитать количество замен. */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         double array[] = ArrayUtils.createAndFill1DArrayRandom(sizeArray, -10.0, 10.0);
-        double z = InputOutputUtils.inputDouble("Введите действительное значение Z: ");
+        double z = InputUtils.inputDouble("Введите действительное значение Z: ", scanner);
         int count = ArrayUtils.countNumberOfReplacements1DArray(array, z);
         System.out.printf("Количество замен элементов одномерного массива числом %f = %d\n", z, count);
     }
@@ -38,7 +45,8 @@ public class Main {
     {
         /* Дан массив действительных чисел, размерность которого N. Подсчитать, сколько в нем отрицательных,
            положительных и нулевых элементов. */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         double array[] = ArrayUtils.createAndFill1DArrayRandom(sizeArray, -10.0, 10.0);
         int arrayResult[] = ArrayUtils.countPositiveNegativeZerosElements1DArray(array);
         System.out.printf("Количество положительных элементов = %d\nКоличество отрицательных элементов = %d\nКоличество нулевых элементов = %d\n", arrayResult[0], arrayResult[1], arrayResult[2]);
@@ -47,7 +55,8 @@ public class Main {
     public static void task4()
     {
         // Даны действительные числа а1 ,а2 ,..., аn . Поменять местами наибольший и наименьший элементы.
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         double array[] = ArrayUtils.createAndFill1DArrayRandom(sizeArray, -10.0, 10.0);
         System.out.println("Текущий массив.");
         ArrayUtils.print1DArray(array);
@@ -59,7 +68,8 @@ public class Main {
     public static void task5()
     {
         // Даны целые числа а1 ,а2 ,..., аn . Вывести на печать только те числа, для которых аi > i.
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         int array[] = ArrayUtils.createAndFill1DArrayRandom(sizeArray, -20, 20);
         System.out.println("Текущий массив.");
         ArrayUtils.print1DArray(array);
@@ -71,7 +81,8 @@ public class Main {
     {
         /* Задана последовательность N вещественных чисел. Вычислить сумму чисел, порядковые номера которых
            являются простыми числами. */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         double array[] = ArrayUtils.createAndFill1DArrayRandom(sizeArray, 0.0, 10.0);
         double sum = ArrayUtils.sumOfElements1DArrayWithSimpleIndexes(array);
         System.out.printf("Сумма элементов одномерного массива, номера которых являются простыми числами =  %f\n", sum);
@@ -80,7 +91,8 @@ public class Main {
     public static void task7()
     {
         // Даны действительные числа a1 ,a2...an. Найти max(a1 + an, a2 + an-1...an + a1).
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         double array[] = ArrayUtils.createAndFill1DArrayRandom(sizeArray, 0.0, 10.0);
         ArrayUtils.print1DArray(array);
         double maxSum = ArrayUtils.maxSumOfOppositeElements(array);
@@ -91,7 +103,8 @@ public class Main {
     {
         /* Дана последовательность целых чисел a1, a2...an. Образовать новую последовательность, выбросив из
            исходной те члены, которые равны min(a1, a2...an). */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         int array[] = ArrayUtils.createAndFill1DArrayRandom(sizeArray, -10, 10);
         System.out.println("Текущий массив.");
         ArrayUtils.print1DArray(array);
@@ -104,7 +117,8 @@ public class Main {
     {
         /* В массиве целых чисел с количеством элементов n найти наиболее часто встречающееся число. Если таких
         чисел несколько, то определить наименьшее из них. */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         int array[] = ArrayUtils.createAndFill1DArrayRandom(sizeArray, -10, 10);
         System.out.println("Текущий массив.");
         ArrayUtils.print1DArray(array);
@@ -116,7 +130,8 @@ public class Main {
     {
         /* Дан целочисленный массив с количеством элементов п. Сжать массив, выбросив из него каждый второй элемент
            (освободившиеся элементы заполнить нулями). Примечание. Дополнительный массив не использовать. */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         int array[] = ArrayUtils.createAndFill1DArrayRandom(sizeArray, -10, 10);
         System.out.println("Текущий массив.");
         ArrayUtils.print1DArray(array);
@@ -132,7 +147,8 @@ public class Main {
     public static void task11()
     {
         // Дана матрица. Вывести на экран все нечетные столбцы, у которых первый элемент больше последнего.
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         int array[][] = ArrayUtils.createAndFill2DArrayRandom(sizeArray, sizeArray, -10, 10);
         System.out.println("Текущий массив.");
         ArrayUtils.print2DArray(array);
@@ -143,7 +159,8 @@ public class Main {
     public static void task12()
     {
         // Дана квадратная матрица. Вывести на экран элементы, стоящие на диагонали.
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         int array[][] = ArrayUtils.createAndFill2DArrayRandom(sizeArray, sizeArray, -10, 10);
         System.out.println("Текущий массив.");
         ArrayUtils.print2DArray(array);
@@ -154,11 +171,12 @@ public class Main {
     public static void task13()
     {
         // Дана матрица. Вывести k-ю строку и p-й столбец матрицы.
-        int sizeArrayA = InputOutputUtils.inputUInt("Введите размерность A по строкам двухмерного массива: ");
-        int sizeArrayB = InputOutputUtils.inputUInt("Введите размерность B по столбцам двухмерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArrayA = InputUtils.inputUInt("Введите размерность A по строкам двухмерного массива: ", scanner);
+        int sizeArrayB = InputUtils.inputUInt("Введите размерность B по столбцам двухмерного массива: ", scanner);
         int array[][] = ArrayUtils.createAndFill2DArrayRandom(sizeArrayA, sizeArrayB, -10, 10);
-        int row = InputOutputUtils.inputUInt("Введите номер строки которую необходимо вывести: ");
-        int column = InputOutputUtils.inputUInt("Введите номер столбца который необходимо вывести: ");
+        int row = InputUtils.inputUInt("Введите номер строки которую необходимо вывести: ", scanner);
+        int column = InputUtils.inputUInt("Введите номер столбца который необходимо вывести: ", scanner);
         System.out.println("Текущий массив.");
         ArrayUtils.print2DArray(array);
         System.out.println("Элементы двухмерного массива заданной строки.");
@@ -176,7 +194,8 @@ public class Main {
            n   n-1 n-2  1
            n   n-1 n-2  1
          */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         int array[][] = ArrayUtils.createAndFill2DArrayCustom1(sizeArray);
         System.out.println("Массив после заполнения данными.");
         ArrayUtils.print2DArray(array);
@@ -191,7 +210,8 @@ public class Main {
           n-1  n-1  0   0   0   0
            n    0   0   0   0   0
          */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         int array[][] = ArrayUtils.createAndFill2DArrayCustom2(sizeArray);
         System.out.println("Массив после заполнения данными.");
         ArrayUtils.print2DArray(array);
@@ -206,7 +226,8 @@ public class Main {
            0    1   1   1   1   0
            1    1   1   1   1   1
          */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         int array[][] = ArrayUtils.createAndFill2DArrayCustom3(sizeArray);
         System.out.println("Массив после заполнения данными.");
         ArrayUtils.print2DArray(array);
@@ -218,7 +239,8 @@ public class Main {
            A[i,j] = sin((i*i - j*j) / n)
            и подсчитать количество положительных элементов в ней.
          */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         double array[][] = new double[sizeArray][sizeArray];
         int count = ArrayUtils.fill2DArrayAndCountingPositiveElements(array);
         System.out.println("Массив после заполнения данными.");
@@ -231,10 +253,11 @@ public class Main {
         /* В числовой матрице поменять местами два столбца любых столбца, т. е. все элементы одного столбца поставить
            на соответствующие им позиции другого, а его элементы второго переместить в первый. Номера столбцов вводит
            пользователь с клавиатуры. */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         int array[][] = ArrayUtils.createAndFill2DArrayRandom(sizeArray, sizeArray, -10, 10);
-        int firstColumn = InputOutputUtils.inputUInt("Введите номер первого столбца для проведения замены: ");
-        int secondColumn = InputOutputUtils.inputUInt("Введите номер второго столбца для проведения замены: ");
+        int firstColumn = InputUtils.inputUInt("Введите номер первого столбца для проведения замены: ", scanner);
+        int secondColumn = InputUtils.inputUInt("Введите номер второго столбца для проведения замены: ", scanner);
         System.out.println("Массив до замены элементов столбцов.");
         ArrayUtils.print2DArray(array);
         ArrayUtils.swapColumns2DArray(array, firstColumn, secondColumn);
@@ -246,7 +269,8 @@ public class Main {
     {
         /* Задана матрица неотрицательных чисел. Посчитать сумму элементов в каждом столбце. Определить, какой
            столбец содержит максимальную сумму. */
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         double array[][] = ArrayUtils.createAndFill2DArrayRandom(sizeArray, sizeArray, 0.0, 100.0);
         System.out.println("Массив после заполнения данными.");
         ArrayUtils.print2DArray(array);
@@ -257,7 +281,8 @@ public class Main {
     public static void task20()
     {
         // Найти положительные элементы главной диагонали квадратной матрицы.
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         int array[][] = ArrayUtils.createAndFill2DArrayRandom(sizeArray, sizeArray, -10, 10);
         System.out.println("Массив данных.");
         ArrayUtils.print2DArray(array);
@@ -280,7 +305,8 @@ public class Main {
     public static void task22()
     {
         // Отсортировать строки матрицы по возрастанию и убыванию значений элементов.
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         int array[][] = ArrayUtils.createAndFill2DArrayRandom(sizeArray, sizeArray, -10, 10);
         System.out.println("Двухмерный массив, заполненный случайными значениями:");
         ArrayUtils.print2DArray(array);
@@ -295,7 +321,8 @@ public class Main {
     public static void task23()
     {
         // Отсотрировать стобцы матрицы по возрастанию и убыванию значений эементов.
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         int array[][] = ArrayUtils.createAndFill2DArrayRandom(sizeArray, sizeArray, -10, 10);
         System.out.println("Двухмерный массив, заполненный случайными значениями:");
         ArrayUtils.print2DArray(array);
@@ -320,7 +347,8 @@ public class Main {
     public static void task25()
     {
         // Найдите наибольший элемент матрицы и заменить все нечетные элементы на него.
-        int sizeArray = InputOutputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray = InputUtils.inputUInt("Введите размерность двухмерного квадратного массива: ", scanner);
         int array[][] = ArrayUtils.createAndFill2DArrayRandom(sizeArray, sizeArray, -10, 10);
         System.out.println("Двухмерный массив, заполненный случайными значениями:");
         ArrayUtils.print2DArray(array);
@@ -339,8 +367,16 @@ public class Main {
            7 5 3
            2 9 4
          */
-        System.out.println("Магический квадрат нечетного порядка.");
-        ArrayUtils.oddMagicSquare(5);
+        Scanner scanner = new Scanner(System.in);
+        int size = InputUtils.inputNaturalNumber("Введите порядок магического квадрата (натуральное число): ", scanner);
+        MagicSquare magicSquare = null;
+        try {
+            magicSquare = MagicSquare.createInstance(size);
+        } catch (MagicSquareSizeException e) {
+            e.printStackTrace();
+        }
+        if (magicSquare != null)
+            magicSquare.printMagicSquare();
     }
 
     /**********************************************************************************************************/
@@ -352,11 +388,12 @@ public class Main {
         /* Заданы два одномерных массива с различным количеством элементов и натуральное число k. Объединить их в
            один массив, включив второй массив между k-м и (k+1) - м элементами первого, при этом не используя
            дополнительный массив. */
-        int sizeA = InputOutputUtils.inputUInt("Введите размерность первого одномерного массива: ");
-        int sizeB = InputOutputUtils.inputUInt("Введите размерность второго одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int sizeA = InputUtils.inputUInt("Введите размерность первого одномерного массива: ", scanner);
+        int sizeB = InputUtils.inputUInt("Введите размерность второго одномерного массива: ", scanner);
         int array1[] = ArrayUtils.createAndFill1DArrayRandom(sizeA, -10, 10);
         int array2[] = ArrayUtils.createAndFill1DArrayRandom(sizeB, -10, 10);
-        int k = InputOutputUtils.inputNaturalNumber("Введите натуральное число K (индекс после которого нужно вставить второй массив): ");
+        int k = InputUtils.inputNaturalNumber("Введите натуральное число K (индекс после которого нужно вставить второй массив): ", scanner);
         System.out.println("Массив 1: ");
         ArrayUtils.print1DArray(array1);
         System.out.println("Массив 2: ");
@@ -401,7 +438,8 @@ public class Main {
         порядке возрастания. Для этого сравниваются два соседних числа ai и ai+1. Если ai > ai+1, то делается
         перестановка. Так продолжается до тех пор, пока все элементы не станут расположены в порядке возрастания.
         Составить алгоритм сортировки, подсчитывая при этом количества перестановок. */
-        int size = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int size = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         int array[] = ArrayUtils.createAndFill1DArrayRandom(size, -10, 10);
         System.out.print("Массив до сортировки: ");
         ArrayUtils.print1DArray(array);
@@ -419,7 +457,8 @@ public class Main {
            последовательность была тоже возрастающей. Процесс производится до тех пор, пока все элементы от i+1 до n
            не будут перебраны. Примечание. Место помещения очередного элемента в отсортированную часть производить
            с помощью двоичного поиска. Двоичный поиск оформить в виде отдельной функции. */
-        int size = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int size = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         int array[] = ArrayUtils.createAndFill1DArrayRandom(size, -10, 10);
         System.out.print("Массив до сортировки: ");
         ArrayUtils.print1DArray(array);
@@ -434,7 +473,8 @@ public class Main {
            Делается это следующим образом: сравниваются два соседних элемента ai и ai+1. Если ai <= ai+1, то
            продвигаются на один элемент вперед. Если ai > ai+1, то производится перестановка и сдвигаются на один
            элемент назад. Составить алгоритм этой сортировки. */
-        int size = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int size = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         double array[] = ArrayUtils.createAndFill1DArrayRandom(size, -10.0, 10.0);
         System.out.print("Массив до сортировки: ");
         ArrayUtils.print1DArray(array);
@@ -448,8 +488,9 @@ public class Main {
         /* Пусть даны две неубывающие последовательности действительных чисел a1 <= a2 <= an и b1 <= b2 <= bm.
            Требуется указать те места, на которые нужно вставлять элементы последовательности b1 <= b2 <= bm в первую
            последовательность так, чтобы новая последовательность оставалась возрастающей. */
-        int size1 = InputOutputUtils.inputUInt("Введите размерность одномерного массива1: ");
-        int size2 = InputOutputUtils.inputUInt("Введите размерность одномерного массива2: ");
+        Scanner scanner = new Scanner(System.in);
+        int size1 = InputUtils.inputUInt("Введите размерность одномерного массива1: ", scanner);
+        int size2 = InputUtils.inputUInt("Введите размерность одномерного массива2: ", scanner);
         double array1[] = ArrayUtils.createAndFill1DArrayRandom(size1, -10.0, 10.0);
         double array2[] = ArrayUtils.createAndFill1DArrayRandom(size2, -10.0, 10.0);
         ArrayUtils.sortShell1DArrayAscending(array1);
@@ -462,12 +503,19 @@ public class Main {
         ArrayUtils.printIndexesInsertionForSort1DArray(array1, array2);
     }
 
-    public static void task34()
-    {
+    public static void task34() {
         /* Даны дроби p1/q1, p2/q2...pn/qn (pi, qi - натуральные). Составить программу, которая приводит эти дроби к
            общему знаменателю и упорядочивает их в порядке возрастания. */
-        int size = InputOutputUtils.inputUInt("Введите размерность одномерного массива для хранения объектов - дробей: ");
-        Fraction array[] = Fraction.createAndFillFractions1DArrayRandom(size, 1, 10);
+        Scanner scanner = new Scanner(System.in);
+        int size = InputUtils.inputUInt("Введите размерность одномерного массива для хранения объектов - дробей: ", scanner);
+        Fraction array[] = null;
+        try {
+            array = Fraction.createAndFillFractions1DArrayRandom(size, 1, 10);
+        } catch (FractionDenominatorInvalidValue e) {
+            e.printStackTrace();
+            System.out.println("Check if input data is correct.");
+            return;
+        }
         System.out.print("Массив случайных дробей: ");
         Fraction.printFractions1DArray(array);
         Fraction.sortFractionsAscending(array);
@@ -485,8 +533,9 @@ public class Main {
            натуральных чисел:
            НОК(A, B) = (A * B) / НОД(A, B)
          */
-        int number1 = InputOutputUtils.inputNaturalNumber("Введите первое натуральное число: ");
-        int number2 = InputOutputUtils.inputNaturalNumber("Введите второе натуральное число: ");
+        Scanner scanner = new Scanner(System.in);
+        int number1 = InputUtils.inputNaturalNumber("Введите первое натуральное число: ", scanner);
+        int number2 = InputUtils.inputNaturalNumber("Введите второе натуральное число: ", scanner);
         int gcd = OtherUtils.greatestCommonDivisor(number1, number2);
         int lcm = OtherUtils.leastCommonMultiple(number1, number2);
         System.out.printf("НОД = %d\n", gcd);
@@ -496,10 +545,11 @@ public class Main {
     public static void task36()
     {
         // Написать метод(методы) для нахождения наибольшего общего делителя четырех натуральных чисел.
-        int number1 = InputOutputUtils.inputNaturalNumber("Введите первое натуральное число: ");
-        int number2 = InputOutputUtils.inputNaturalNumber("Введите второе натуральное число: ");
-        int number3 = InputOutputUtils.inputNaturalNumber("Введите третье натуральное число: ");
-        int number4 = InputOutputUtils.inputNaturalNumber("Введите четвертое натуральное число: ");
+        Scanner scanner = new Scanner(System.in);
+        int number1 = InputUtils.inputNaturalNumber("Введите первое натуральное число: ", scanner);
+        int number2 = InputUtils.inputNaturalNumber("Введите второе натуральное число: ", scanner);
+        int number3 = InputUtils.inputNaturalNumber("Введите третье натуральное число: ", scanner);
+        int number4 = InputUtils.inputNaturalNumber("Введите четвертое натуральное число: ", scanner);
         int gcd = OtherUtils.greatestCommonDivisor(number1, number2, number3, number4);
         System.out.printf("НОД четырех и более чисел = %d\n", gcd);
     }
@@ -507,7 +557,8 @@ public class Main {
     public static void task37()
     {
         // Вычислить площадь правильного шестиугольника со стороной а, используя метод вычисления площади треугольника.
-        double sideLength = InputOutputUtils.inputUDouble("Введите длинну стороны правильного шестиугольника: ");
+        Scanner scanner = new Scanner(System.in);
+        double sideLength = InputUtils.inputUDouble("Введите длинну стороны правильного шестиугольника: ", scanner);
         double areaOfHexagon = OtherUtils.areaOfRegularHexagon(sideLength);
         System.out.printf("Площадь правильного шестиугольника = %f\n", areaOfHexagon);
     }
@@ -516,7 +567,8 @@ public class Main {
     {
         /* На плоскости заданы своими координатами n точек. Написать метод(методы), определяющие, между какими из пар
            точек самое большое расстояние. Указание. Координаты точек занести в массив. */
-        int countOfPoints = InputOutputUtils.inputNaturalNumber("Введите количество необходимых точек: ");
+        Scanner scanner = new Scanner(System.in);
+        int countOfPoints = InputUtils.inputNaturalNumber("Введите количество необходимых точек: ", scanner);
         double points[][] = ArrayUtils.createAndFill2DArrayRandom(countOfPoints, 2, 0.0, 10.0);
         System.out.println("Массив случайно сгенерированных координат точек.");
         ArrayUtils.print2DArray(points);
@@ -531,12 +583,13 @@ public class Main {
     {
         /* Составить программу, которая в массиве A[N] находит второе по величине число (вывести на печать число,
            которое меньше максимального элемента массива, но больше всех других элементов). */
-        int size = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int size = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         int array[] = ArrayUtils.createAndFill1DArrayRandom(size, -10, 10);
         System.out.print("Массив случайных значений: ");
         ArrayUtils.print1DArray(array);
-        int secondMax = ArrayUtils.secondMaxNumber1DArray(array);
-        if (secondMax != Integer.MIN_VALUE) {
+        Integer secondMax = ArrayUtils.secondMaxNumber1DArray(array);
+        if (secondMax != null) {
             System.out.printf("Второе по величине число: %d\n", secondMax);
         }
         else
@@ -548,9 +601,10 @@ public class Main {
     public static void task40()
     {
         // Написать метод(методы), проверяющий, являются ли данные три числа взаимно простыми.
-        int number1 = InputOutputUtils.inputNaturalNumber("Введите первое натуральное число: ");
-        int number2 = InputOutputUtils.inputNaturalNumber("Введите второе натуральное число: ");
-        int number3 = InputOutputUtils.inputNaturalNumber("Введите третье натуральное число: ");
+        Scanner scanner = new Scanner(System.in);
+        int number1 = InputUtils.inputNaturalNumber("Введите первое натуральное число: ", scanner);
+        int number2 = InputUtils.inputNaturalNumber("Введите второе натуральное число: ", scanner);
+        int number3 = InputUtils.inputNaturalNumber("Введите третье натуральное число: ", scanner);
         boolean isMutuallyPrime = OtherUtils.isMutuallyPrimeNumbers(number1, number2, number3);
         System.out.print(isMutuallyPrime);
     }
@@ -558,8 +612,9 @@ public class Main {
     public static void task41()
     {
         // Написать метод(методы) для вычисления суммы факториалов всех нечетных чисел от 1 до 9.
-        int limitA = InputOutputUtils.inputUInt("Введите нижнюю границу диапазона: ");
-        int limitB = InputOutputUtils.inputUInt("Введите верхнюю границу диапазона: ");
+        Scanner scanner = new Scanner(System.in);
+        int limitA = InputUtils.inputUInt("Введите нижнюю границу диапазона: ", scanner);
+        int limitB = InputUtils.inputUInt("Введите верхнюю границу диапазона: ", scanner);
         BigInteger sum = OtherUtils.sumOfFactorialsOddNumbersInRange(limitA, limitB);
         System.out.printf("Сумма факториалов нечетных натуральных чисел из промежутка [%d, %d): %s", limitA, limitB, sum);
     }
@@ -569,9 +624,10 @@ public class Main {
         /* Задан массив D. Определить следующие суммы: D[l] + D[2] + D[3]; D[3] + D[4] + D[5]; D[4] +D[5] +D[6].
            Пояснение. Составить метод(методы) для вычисления суммы трех последовательно расположенных элементов массива
            с номерами от k до m. */
-        int size = InputOutputUtils.inputUInt("Введите размерность одномерного массива: ");
+        Scanner scanner = new Scanner(System.in);
+        int size = InputUtils.inputUInt("Введите размерность одномерного массива: ", scanner);
         double array[] = ArrayUtils.createAndFill1DArrayRandom(size, -10.0, 10.0);
-        int indexSum = InputOutputUtils.inputUInt("Введите индекс начала последовательной суммы: ");
+        int indexSum = InputUtils.inputUInt("Введите индекс начала последовательной суммы: ", scanner);
         double sum = ArrayUtils.consecutiveSumOfThreeElements(array, indexSum);
         System.out.print("Массив созданный случайным образом: ");
         ArrayUtils.print1DArray(array);
@@ -582,10 +638,11 @@ public class Main {
     {
         /* Даны числа X, Y, Z, Т — длины сторон четырехугольника. Написать метод(методы) вычисления его площади, если
            угол между сторонами длиной X и Y— прямой. */
-        double x = InputOutputUtils.inputUDouble("Введите X длину стороны четырехугольника: ");
-        double y = InputOutputUtils.inputUDouble("Введите Y длину стороны четырехугольника: ");
-        double z = InputOutputUtils.inputUDouble("Введите Z длину стороны четырехугольника: ");
-        double t = InputOutputUtils.inputUDouble("Введите T длину стороны четырехугольника: ");
+        Scanner scanner = new Scanner(System.in);
+        double x = InputUtils.inputUDouble("Введите X длину стороны четырехугольника: ", scanner);
+        double y = InputUtils.inputUDouble("Введите Y длину стороны четырехугольника: ", scanner);
+        double z = InputUtils.inputUDouble("Введите Z длину стороны четырехугольника: ", scanner);
+        double t = InputUtils.inputUDouble("Введите T длину стороны четырехугольника: ", scanner);
         double area = OtherUtils.areaOfQuadrangle(x, y, z, t);
         System.out.printf("Площадь четырехугольника с прямым углом между стороной X и Y: %f\n", area);
     }
@@ -594,7 +651,8 @@ public class Main {
     {
         /* Дано натуральное число N. Написать метод(методы) для формирования массива, элементами которого являются
            цифры числа N. */
-        int number = InputOutputUtils.inputNaturalNumber("Введите натуральное число: ");
+        Scanner scanner = new Scanner(System.in);
+        int number = InputUtils.inputNaturalNumber("Введите натуральное число: ", scanner);
         int array[] = ArrayUtils.createAndFill1DArrayWithDigitsFromNumber(number);
         System.out.print("Массив из цифр заданного числа: ");
         ArrayUtils.print1DArray(array);
@@ -603,8 +661,9 @@ public class Main {
     public static void task45()
     {
         // Написать метод(методы), определяющий, в каком из данных двух чисел больше цифр.
-        int number1 = InputOutputUtils.inputNaturalNumber("Введите первое натуральное число: ");
-        int number2 = InputOutputUtils.inputNaturalNumber("Введите второе натуральное число: ");
+        Scanner scanner = new Scanner(System.in);
+        int number1 = InputUtils.inputNaturalNumber("Введите первое натуральное число: ", scanner);
+        int number2 = InputUtils.inputNaturalNumber("Введите второе натуральное число: ", scanner);
         int numberWithMaxDigits = OtherUtils.naturalNumberWithMaxDigits(number1, number2);
         System.out.printf("Число с наибольшим количеством цифр: %d\n", numberWithMaxDigits);
     }
@@ -613,8 +672,9 @@ public class Main {
     {
         /* Даны натуральные числа К и N. Написать метод(методы) формирования массива А, элементами которого являются
            числа, сумма цифр которых равна К и которые не большее N. */
-        int k = InputOutputUtils.inputNaturalNumber("Введите первое натуральное число: ");
-        int n = InputOutputUtils.inputNaturalNumber("Введите второе натуральное число: ");
+        Scanner scanner = new Scanner(System.in);
+        int k = InputUtils.inputNaturalNumber("Введите первое натуральное число: ", scanner);
+        int n = InputUtils.inputNaturalNumber("Введите второе натуральное число: ", scanner);
         int array[] = ArrayUtils.createAndFillCustom1DArray(k, n);
         System.out.printf("Массив сформированный из чисел с суммой цифр = %d и числом не более %d: ", k, n);
         ArrayUtils.print1DArray(array);
@@ -625,7 +685,8 @@ public class Main {
         /* Два простых числа называются «близнецами», если они отличаются друг от друга на 2 (например, 41 и 43).
            Найти и напечатать все пары «близнецов» из отрезка [n,2n], где n - заданное натуральное число больше 2.
            Для решения задачи использовать декомпозицию. */
-        int n = InputOutputUtils.inputNaturalNumber("Введите число n: ");
+        Scanner scanner = new Scanner(System.in);
+        int n = InputUtils.inputNaturalNumber("Введите число n: ", scanner);
         System.out.printf("Все простые числа-близнецы в промежутке [%d, %d].\n", n, 2 * n);
         OtherUtils.printTwinPrimesInRange(n);
     }
@@ -635,7 +696,8 @@ public class Main {
         /* Натуральное число, в записи которого n цифр, называется числом Армстронга, если сумма его цифр, возведенная
            в степень n, равна самому числу. Найти все числа Армстронга от 1 до k. Для решения задачи использовать
            декомпозицию. */
-        int k = InputOutputUtils.inputNaturalNumber("Введите верхнюю границу для поиска чисел Армстронга: ");
+        Scanner scanner = new Scanner(System.in);
+        int k = InputUtils.inputNaturalNumber("Введите верхнюю границу для поиска чисел Армстронга: ", scanner);
         int array[] = OtherUtils.searchAllArmstrongNumbersInRange(k);
         System.out.print("Массив из чисел Армстронга: ");
         ArrayUtils.print1DArray(array);
@@ -645,7 +707,8 @@ public class Main {
     {
         /* Найти все натуральные n-значные числа, цифры в которых образуют строго возрастающую последовательность
            (например, 1234, 5789). Для решения задачи использовать декомпозицию. */
-        int n = InputOutputUtils.inputNaturalNumber("Введите количество цифр натурального числа: ");
+        Scanner scanner = new Scanner(System.in);
+        int n = InputUtils.inputNaturalNumber("Введите количество цифр натурального числа: ", scanner);
         System.out.print("N - значные числа, цифры которых образуют строго возрастающую последовательность: ");
         try {
             OtherUtils.printAllNaturalNumbersWithDigitsAscending(n);
@@ -658,7 +721,8 @@ public class Main {
     {
         /* Написать программу, определяющую сумму n - значных чисел, содержащих только нечетные цифры. Определить также,
            сколько четных цифр в найденной сумме. Для решения задачи использовать декомпозицию. */
-        int n = InputOutputUtils.inputNaturalNumber("Введите количество цифр натурального числа: ");
+        Scanner scanner = new Scanner(System.in);
+        int n = InputUtils.inputNaturalNumber("Введите количество цифр натурального числа: ", scanner);
         BigInteger sum = BigInteger.ZERO;
         try {
             sum = OtherUtils.sumOfNaturalNumbersWithOddDigits(n);
@@ -674,13 +738,13 @@ public class Main {
     {
         /* Из заданного числа вычли сумму его цифр. Из результата вновь вычли сумму его цифр и т.д. Сколько таких
            действий надо произвести, чтобы получился нуль? Для решения задачи использовать декомпозицию. */
-        int number = InputOutputUtils.inputNaturalNumber("Введите натуральное число: ");
+        Scanner scanner = new Scanner(System.in);
+        int number = InputUtils.inputNaturalNumber("Введите натуральное число: ", scanner);
         int count = OtherUtils.countOfSubstraction(number);
         System.out.printf("Количество вычитаний суммы цифр: %d\n", count);
     }
 
-    public static void main(String[] args)
-    {
-        task51();
+    public static void main(String[] args) {
+        task26();
     }
 }

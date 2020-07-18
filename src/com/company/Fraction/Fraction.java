@@ -1,42 +1,82 @@
-package com.company;
+package com.company.Fraction;
 import Utils.OtherUtils.OtherUtils;
+import com.company.Fraction.Exceptions.FractionDenominatorInvalidValue;
 
 import static Utils.OtherUtils.OtherUtils.randInt;
 
-public class Fraction {
+public final class Fraction implements Comparable<Fraction>{
 
     /* Класс дробь описывает объект - дробь в виде двух целочисленных аргументов numerator - числитель и denominator -
        знаменатель. Поддерживаются отрицательные значения числителя и знаменателя. В классе реализованы методы
        сортировки как для дробей приведеных к общему знаменателю так и для неприведеных дробей, а так же другие
        вспомогательные методы. */
-    public int numerator;
-    public int denominator;
 
-    public Fraction(int numerator, int denominator)
+    private int numerator;
+    private int denominator;
+
+    private Fraction(int numerator, int denominator)
     {
         this.numerator = numerator;
         this.denominator = denominator;
     }
 
-    public Fraction()
-    {
-        numerator = 1;
-        denominator = 1;
+    public int getNumerator() {
+        return numerator;
     }
 
-    public static Fraction generateRandomFraction(int limitA, int limitB)
-    {
-        /* Генерирует случайный числитель и знаменатель для дроби в пределах заданного [limitA, limitB]. Возвращает
-        объект - дробь (числитель и знаменатель). */
+    public int getDenominator() {
+        return denominator;
+    }
+
+    public static Fraction createInstance(int numerator, int denominator) throws FractionDenominatorInvalidValue {
+        // Метод для создания объекта. При некорректных данных может выбрасывать исключение FractionDenominatorInvalidValue.
+        if (denominator != 0)
+            return new Fraction(numerator, denominator);
+        throw new FractionDenominatorInvalidValue("Invalid value of denominator");
+    }
+
+    public static Fraction generateRandomFraction(int limitA, int limitB) throws FractionDenominatorInvalidValue {
+        /* Генерирует случайный числитель и знаменатель для дроби в пределах заданного [limitA, limitB]. Если в
+        промежутке присутствует ноль, то игнорирует его и рандомит по другим ненулевым значениям. Если же промежуток
+        состоит из одних нулей выбрасывает исключение FractionDenominatorInvalidValue. Возвращает объект - дробь
+        (числитель и знаменатель). */
+        if (limitA == 0 && limitB == 0)
+            throw new FractionDenominatorInvalidValue("Invalid value of denominator");
+        if (limitA == 0) {
+            if (limitB > 0)
+                limitA++;
+            else
+                limitA--;
+        }
+        else if (limitB == 0) {
+            if (limitA > 0)
+                limitB++;
+            else
+                limitB--;
+        }
+        else {
+            if (limitA < 0 && limitB > 0)
+            {
+                int numerator = (randInt(0, 1) == 0) ? randInt(limitA, -1) : randInt(1, limitB);
+                int denominator = (randInt(0, 1) == 0) ? randInt(limitA, -1) : randInt(1, limitB);
+                return createInstance(numerator, denominator);
+            }
+            else if (limitA > 0 && limitB < 0)
+            {
+                int numerator = (randInt(0, 1) == 0) ? randInt(1, limitA) : randInt(-1, limitB);
+                int denominator = (randInt(0, 1) == 0) ? randInt(1, limitA) : randInt(-1, limitB);
+                return createInstance(numerator, denominator);
+            }
+        }
         int numerator = randInt(limitA, limitB);
         int denominator = randInt(limitA, limitB);
-        return new Fraction(numerator, denominator);
+        return createInstance(numerator, denominator);
     }
 
-    public static Fraction[] createAndFillFractions1DArrayRandom(int size, int limitA, int limitB)
-    {
-        /* Создает массив объектов - дробей. Дроби генерируются случайным образом. Диапазон значений числителя и
-           знаменателя задается limitA и limitB. */
+    public static Fraction[] createAndFillFractions1DArrayRandom(int size, int limitA, int limitB) throws FractionDenominatorInvalidValue {
+        /* Создает массив объектов - дробей. Размер массива задается параметром size. Дроби генерируются случайным
+        образом. Диапазон значений числителя и знаменателя задается limitA и limitB. Если диапазон некорректен,
+        выбрасывает исключение FractionDenominatorInvalidValue. */
         Fraction array[] = new Fraction[size];
         for (int i = 0; i < size; i++)
         {
@@ -60,7 +100,9 @@ public class Fraction {
     public static Fraction[] reductionOfFractionsToACommonDenominator(Fraction[] array)
     {
         /* Приведение одномерного массива дробей к общему знаменателю. Создает и возвращает новый одномерный массив
-           приведенных дробей. */
+           приведенных дробей. Если массив пустой, то возвращает новый пустой массив. */
+        if (array.length == 0)
+            return new Fraction[0];
         int commonDenominator = array[0].denominator;
         for (Fraction fraction : array)
         {
@@ -134,4 +176,16 @@ public class Fraction {
         this.denominator /= gcd;
     }
 
+    @Override
+    public String toString() {
+        return "Fraction{" +
+                "numerator=" + numerator +
+                ", denominator=" + denominator +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Fraction o) {
+        return Double.compare(toDouble(), o.toDouble());
+    }
 }

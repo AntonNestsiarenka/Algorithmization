@@ -1,12 +1,14 @@
 package Utils.ArraysUtils;
 
 import Utils.OtherUtils.OtherUtils;
-import com.company.Pair;
+import com.company.Pair.Pair;
 
 public class ArrayUtils {
 
+    /* Методы для работы с массивами. */
+
     public static int[] createAndFill1DArrayRandom(int size, int limitA, int limitB) {
-        // Функция создает целочисленный массив размерности size и заполняет его случайными значениями от [limitA, limitB].
+        // Метод создает целочисленный массив размерности size и заполняет его случайными значениями от [limitA, limitB].
         int array[] = new int[size];
         for (int i = 0; i < size; i++)
             array[i] = OtherUtils.randInt(limitA, limitB);
@@ -14,7 +16,7 @@ public class ArrayUtils {
     }
 
     public static double[] createAndFill1DArrayRandom(int size, double limitA, double limitB) {
-        // Функция создает массив действительных чисел размерности size и заполняет его случайными значениями от [limitA, limitB).
+        // Метод создает массив действительных чисел размерности size и заполняет его случайными значениями от [limitA, limitB).
         double array[] = new double[size];
         for (int i = 0; i < size; i++)
             array[i] = OtherUtils.uniform(limitA, limitB);
@@ -36,7 +38,7 @@ public class ArrayUtils {
     }
 
     public static int sumOfMultipleElements1DArray(int[] array, int k) {
-        // Функция возвращает сумму элементов одномерного массива кратных k.
+        // Метод возвращает сумму элементов одномерного массива кратных k.
         int sum = 0;
         for (int element : array) {
             if (element % k == 0) {
@@ -52,7 +54,7 @@ public class ArrayUtils {
     }
 
     public static int countNumberOfReplacements1DArray(double[] array, double z) {
-        // Функция возвращает количество выполненных замен элементов массива на число z.
+        // Метод возвращает количество выполненных замен элементов массива на число z.
         int countOfReplacements = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] > z) {
@@ -64,8 +66,8 @@ public class ArrayUtils {
     }
 
     public static int[] countPositiveNegativeZerosElements1DArray(double[] array) {
-        /*Функция считает количество положительных, отрицательных и нулевых элементов в одномерном массиве, формирует и
-          возвращает одномерный массив результатов подсчета.*/
+        /* Метод считает количество положительных, отрицательных и нулевых элементов в одномерном массиве, формирует и
+           возвращает одномерный массив результатов подсчета. */
         int countPositive = 0;
         int countNegative = 0;
         int countZeros = 0;
@@ -83,10 +85,12 @@ public class ArrayUtils {
     }
 
     public static void swapMinMaxElements1DArray(double[] array) {
-        // Функция ищет максимальный и минимальный элемент в одномерном массиве и меняет их местами.
-        double minElement = 0;
+        // Метод ищет максимальный и минимальный элемент в одномерном массиве и меняет их местами.
+        if (array.length <= 1)
+            return;
+        double minElement = array[0];
         int indexMinElement = 0;
-        double maxElement = 0;
+        double maxElement = array[0];
         int indexMaxElement = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] < minElement) {
@@ -155,11 +159,9 @@ public class ArrayUtils {
            исключая минимальный элемент (элементы если их несколько). */
         Pair min = minElementAndCountIn1DArray(array);
         int newArray[] = new int[array.length - min.getSecond()];
-        for (int i = 0, j = 0; i < newArray.length; i++, j++) {
+        for (int i = 0, j = 0; i < newArray.length; j++) {
             if (array[j] != min.getFirst()) {
-                newArray[i] = array[j];
-            } else {
-                newArray[i] = array[++j];
+                newArray[i++] = array[j];
             }
         }
         return newArray;
@@ -211,7 +213,7 @@ public class ArrayUtils {
     }
 
     public static int mostFrequentNumber(int[] array) {
-        /* Функция определяет наиболее часто встречающееся целое число в одномерном массиве. Если таких чисел несколько,
+        /* Метод определяет наиболее часто встречающееся целое число в одномерном массиве. Если таких чисел несколько,
            то возвращает результатом наиболее меньшее число. */
         int newArray[] = sorted1DArray(array);
         int maxCount = 0;
@@ -239,7 +241,7 @@ public class ArrayUtils {
     }
 
     public static void compress1DArray(int[] array) {
-        /* Функция сжимает одномерный массив: каждый второй элемент отбрасывается, оставшиеся элементы смещаются влево.
+        /* Метод сжимает одномерный массив: каждый второй элемент отбрасывается, оставшиеся элементы смещаются влево.
            Свободные зоны после смещения элементов заполняются нулями */
         int countOfPermutations = array.length / 2 - 1 + array.length % 2;
         int ind = 1;
@@ -324,8 +326,8 @@ public class ArrayUtils {
             for (int j = 0; j < array[rowNumber].length; j++) {
                 System.out.printf("%4d  ", array[rowNumber][j]);
             }
+            System.out.println();
         }
-        System.out.println();
     }
 
     public static void printAllElementsFixedColumn2DArray(int[][] array, int columnNumber) {
@@ -334,8 +336,8 @@ public class ArrayUtils {
             for (int i = 0; i < array.length; i++) {
                 System.out.printf("%4d  ", array[i][columnNumber]);
             }
+            System.out.println();
         }
-        System.out.println();
     }
 
     public static int[][] createAndFill2DArrayCustom1(int size) {
@@ -395,7 +397,7 @@ public class ArrayUtils {
     }
 
     public static int fill2DArrayAndCountingPositiveElements(double[][] array) {
-        /* Функция заполняет переданный ей квадратный двухмерный массив по формуле A[i, j] = sin((i * i - j * j) / N).
+        /* Метод заполняет переданный ей квадратный двухмерный массив по формуле A[i, j] = sin((i * i - j * j) / N).
            N -размерность квадратного массива, i,j - индексы строк/столбцов. Результатом возвращает количество
            заполненных положительных элементов. */
         int count = 0;
@@ -411,7 +413,7 @@ public class ArrayUtils {
     }
 
     public static void swapColumns2DArray(int[][] array, int numberRow1, int numberRow2) {
-        /* Функция меняет местами значения элементов столбца numberRow1 и numberRow2 в двухмерном массиве. Если
+        /* Метод меняет местами значения элементов столбца numberRow1 и numberRow2 в двухмерном массиве. Если
            какого-либо номера столбца не существует, то ничего не делает. */
         if (numberRow1 >= 0 && numberRow1 < array[0].length && numberRow2 >= 0 && numberRow2 < array[0].length) {
             for (int i = 0; i < array.length; i++) {
@@ -423,7 +425,8 @@ public class ArrayUtils {
     }
 
     public static int numberOfColumnWithMaxSum2DArray(double[][] array) {
-        // Функция определяет максимальную сумму в столбцах и номер столбца с максимальной суммой.
+        /* Метод определяет максимальную сумму в столбцах и номер столбца с максимальной суммой. Возвращает индекс
+           столбца с максимальной суммой. */
         double maxSum = 0;
         int columnInd = 0;
         for (int j = 0; j < array[0].length; j++) {
@@ -440,7 +443,7 @@ public class ArrayUtils {
     }
 
     public static int[] positiveElementsOfMainDiagonal2DArray(int[][] array) {
-        // Функция возвращает одномерный массив положительных элементов главной диагонали квадратного двухмерного массива.
+        // Метод возвращает одномерный массив положительных элементов главной диагонали квадратного двухмерного массива.
         int positiveElements[] = new int[array.length];
         int iOther = 0;
         for (int i = 0, j = 0; i < array.length; i++, j++) {
@@ -460,7 +463,7 @@ public class ArrayUtils {
     }
 
     public static void printNumbersOfRowsWithSomeCondition(int[][] array, int value, int countCondition) {
-        /* Функция выводит в консоль номера строк в которых значение value встречается больше либо равно
+        /* Метод выводит в консоль номера строк в которых значение value встречается больше либо равно
            countCondition раз. */
         for (int i = 0; i < array.length; i++) {
             int count = 0;
@@ -476,21 +479,21 @@ public class ArrayUtils {
     }
 
     public static void sortAscendingByRows2DArray(int[][] array) {
-        // сортировка по строкам элементов в порядке возрастания.
+        // Сортировка по строкам элементов в порядке возрастания.
         for (int i = 0; i < array.length; i++) {
             sort1DArrayAscending(array[i]);
         }
     }
 
     public static void sortDescendingByRows2DArray(int[][] array) {
-        // сортировка по строкам элементов в порядке убывания.
+        // Сортировка по строкам элементов в порядке убывания.
         for (int i = 0; i < array.length; i++) {
             sort1DArrayDescending(array[i]);
         }
     }
 
     public static void sortAscendingByColumns2DArray(int[][] array) {
-        // сортировка по столбцам элементов в порядке возрастания.
+        // Сортировка по столбцам элементов в порядке возрастания.
         for (int j = 0; j < array[0].length; j++) {
             int temp[] = new int[array.length];
             for (int i = 0; i < array.length; i++) {
@@ -504,7 +507,7 @@ public class ArrayUtils {
     }
 
     public static void sortDescendingByColumns2DArray(int[][] array) {
-        // сортировка по столбцам элементов в порядке убывания.
+        // Сортировка по столбцам элементов в порядке убывания.
         for (int j = 0; j < array[0].length; j++) {
             int temp[] = new int[array.length];
             for (int i = 0; i < array.length; i++) {
@@ -690,11 +693,11 @@ public class ArrayUtils {
         }
     }
 
-    public static int secondMaxNumber1DArray(int[] array) {
-        // Возвращает второе по величине число. Если такого числа нет, то возвращает Integer.MIN_VALUE.
+    public static Integer secondMaxNumber1DArray(int[] array) {
+        // Возвращает второе по величине число. Если такого числа нет, то возвращает null.
         int copyArray[] = array.clone();
         sort1DArrayBySelectionDescending(copyArray);
-        int secondMaxNumber = Integer.MIN_VALUE;
+        //int secondMaxNumber = Integer.MIN_VALUE;
         int i = 0;
         while (i < copyArray.length) {
             if (copyArray[i] < copyArray[0] && copyArray[i] != copyArray[copyArray.length - 1]) {
@@ -702,7 +705,7 @@ public class ArrayUtils {
             }
             i++;
         }
-        return secondMaxNumber;
+        return null;
     }
 
     public static double consecutiveSumOfThreeElements(double[] array, int indexSum) throws ArrayIndexOutOfBoundsException {
@@ -754,30 +757,4 @@ public class ArrayUtils {
         array = resize1DArrayToDown(array, j);
         return array;
     }
-
-    public static void oddMagicSquare(int n) {
-        // Выводит в консоль магический квадрат нечетного порядка.
-        int array[][] = new int[n][n];
-        int countValues = n * n;
-        int i = 0;
-        int j = n / 2;
-        int number = 1;
-        while (number <= countValues) {
-            if (i < 0 && j > n - 1) {
-                i += 2;
-                j -= 1;
-            } else if (i < 0) {
-                i = n - 1;
-            } else if (j > n - 1) {
-                j = 0;
-            }
-            if (array[i][j] != 0) {
-                i += 2;
-                j -= 1;
-            }
-            array[i--][j++] = number++;
-        }
-        print2DArray(array);
-    }
-
 }
